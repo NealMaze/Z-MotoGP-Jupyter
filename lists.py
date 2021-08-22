@@ -54,28 +54,3 @@ secTime = re.compile("^\d{1,2}[.]\d{3}[*]{0,1}$")
 lapTime = re.compile("^\d{1,2}[']\d\d[.]\d\d\d[*]{0,1}$")
 pitTime = re.compile("^\d{1,2}[:]\d\d[']\d\d[.]\d\d\d$")
 
-def toSecs(receive):
-    strings = ["unfinished", "PIT"]
-
-    if isinstance(receive, float):
-        ret = receive
-
-    elif receive in strings:
-        ret = None
-
-    else:
-        receive = receive.replace("*", "")
-        totSec = 0
-
-        if ":" in receive:
-            hours, receive = receive.split(':')
-            totSec += int(hours) * 3600
-
-        if "'" in receive:
-            minutes, receive = receive.split("'")
-            totSec += int(minutes) * 60
-
-        totSec += float(receive)
-        ret = totSec
-
-    return ret
